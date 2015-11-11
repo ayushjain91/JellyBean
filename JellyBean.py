@@ -8,6 +8,7 @@ BIOLOGICAL_RESULTS_FILE_AA = './biological_dataset_aa.csv'
 CROWD_RESULTS_FILE = './crowd_dataset.csv'
 NUM_IMAGES_PER_HIT = 15
 
+NOTE = "# This implementation of Articulation Avoidance is different from the one proposed in the paper\n# It uses additional heuristics to reduce the number of questions further by ~3%\n# The data provided, however, is for bins generated without using these additional heuristics"
 
 
 
@@ -51,10 +52,9 @@ def articulation_avoidance(segmentation_graph, segment_counts):
 		new_group.append(new_center)
 		current_size = segment_counts[new_center]
 
-		regular_neighbors = [] #non cutpoints
-		cutpoint_neighbors = []
+		regular_neighbors = [] # non Articulation Points
+		cutpoint_neighbors = [] # Articulation Points
 
-		#rearrange to put cutpoints lower
 		for node in segmentation_graph.neighbors(new_center):
 		    if node in remaining_nodes:
 		        if node in cutpoints:
@@ -74,7 +74,7 @@ def articulation_avoidance(segmentation_graph, segment_counts):
 				cutpoints = list(nx.articulation_points(H))
 
 				
-	        	# Reestimate cutpoint_neighbors and regular_neighbors
+	        	# Recompute cutpoint_neighbors and regular_neighbors
 				for vertex in cutpoint_neighbors:
 					if vertex not in cutpoints:
 						cutpoint_neighbors.remove(vertex)
@@ -213,7 +213,7 @@ def read_segmentation_graph(img_no):
 	total_count = 0
 	max_segment_count = 0
 
-	segGraphFile = './biological_dataset/img'+str(img_no).zfill(2)+'/segmentationGraph.txt'
+	segGraphFile = './biological_dataset/IMG_'+str(img_no).zfill(2)+'/AA/segmentationGraph.txt'
 	raw_graph = open(segGraphFile,'r')
 	header = map(int,raw_graph.readline().split(" "))
 
@@ -248,6 +248,7 @@ def read_segmentation_graph(img_no):
 from tabulate import tabulate
 
 print "===========================================\nArticulation Avoidance (BIOLOGICAL DATASET)\n==========================================="
+print NOTE
 mat = []
 for i in range(1,21):
 	G, count = read_segmentation_graph(i)
