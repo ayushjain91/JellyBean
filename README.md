@@ -1,6 +1,6 @@
 # JellyBean
 
-This repository contains code and data fir the oaoer
+This repository contains code and data for the paper
 [*Surpassing Humans and Computers with JELLYBEAN: Crowd-Vision-Hybrid Counting Algorithms*]
 (http://www.aaai.org/ocs/index.php/HCOMP/HCOMP15/paper/viewFile/11593/11440).
 
