@@ -26,6 +26,6 @@ This repository contains code and data for the paper
 python JellyBean.py
 ```
 
-**NOTE:** The implementation of Articulation Avoidance here is different from the one proposed in the paper. It uses additional heuristics to reduce the number of questions further by ~3%. The data provided, however, is for bins generated without using these additional heuristics
+**NOTE:** The implementation of Articulation Avoidance here is different from the one proposed in the paper. It uses additional heuristics to reduce the number of questions further. The data provided, however, is for bins generated without using these additional heuristics
 
     
